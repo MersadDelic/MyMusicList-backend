@@ -42,10 +42,10 @@ namespace MyMusicList
             
             // dodajemo kontekste
             services.AddDbContext<SongContext>(opt =>
-                opt.UseInMemoryDatabase("MyMusicList"));
+                opt.UseInMemoryDatabase("MyMusicList")); // in memory db ( refresh pri svakom deployu)
 
             services.AddDbContext<CategoryContext>(opt =>
-                opt.UseInMemoryDatabase("MyMusicList"));
+                opt.UseInMemoryDatabase("MyMusicList"));  // in memory db ( refresh pri svakom deployu)
 
         }  
 

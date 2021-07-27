@@ -1,20 +1,19 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace MyMusicList.Models
 {
-    public class Song
+    public class Song: BaseEntity
     {
-        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Title { get; set; }
         public string Artist { get; set; }
         public string Url { get; set; }
         public int Rating { get; set; }
         public int IsFavourite { get; set; }
-        public DateTime CreatedTime { get; set; }
-        public DateTime ModifiedTime { get; set; }
         
         // FK
         [JsonIgnore]

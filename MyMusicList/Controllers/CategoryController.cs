@@ -9,7 +9,7 @@ using MyMusicList.Models;
 
 namespace MyMusicList.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/categories")]
     [ApiController]
     public class CategoryController : ControllerBase
     {
@@ -20,31 +20,29 @@ namespace MyMusicList.Controllers
             _context = context;
         }
 
-        // GET: api/Category
+        // GET: api/categories
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
+        public ActionResult<List<Category>> GetCategories()
         {
-            return await _context.Categories.ToListAsync();
+            return _context.Categories.ToList();
         }
 
-        // GET: api/Category/5
+        // GET: api/categories/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Category>> GetCategory(int id)
+        public ActionResult<Category> GetCategory(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
+            var category = _context.Categories.Find(id);
 
             if (category == null)
             {
                 return NotFound();
             }
-
             return category;
         }
 
-        // PUT: api/Category/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // PUT: api/categories/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategory(int id, Category category)
+        public IActionResult PutCategory(int id, Category category)
         {
             if (id != category.Id)
             {
@@ -55,7 +53,7 @@ namespace MyMusicList.Controllers
 
             try
             {
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -72,31 +70,30 @@ namespace MyMusicList.Controllers
             return NoContent();
         }
 
-        // POST: api/Category
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // POST: api/categories
         [HttpPost]
-        public async Task<ActionResult<Category>> PostCategory(Category category)
+        public ActionResult<Category> PostCategory(Category category)
         {
             _context.Categories.Add(category);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             
          //   return CreatedAtAction(nameof(GetSong), new { id = song.Id }, song);
 
             return CreatedAtAction(nameof(GetCategory), new { id = category.Id }, category);
         }
 
-        // DELETE: api/Category/5
+        // DELETE: api/categories/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCategory(int id)
+        public IActionResult DeleteCategory(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
+            var category = _context.Categories.Find(id);
             if (category == null)
             {
                 return NotFound();
             }
 
             _context.Categories.Remove(category);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return NoContent();
         }
