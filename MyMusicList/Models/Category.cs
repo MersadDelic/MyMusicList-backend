@@ -5,12 +5,13 @@ using System.Text.Json.Serialization;
 
 namespace MyMusicList.Models
 {
-    public class Category: BaseEntity
+    public class Category
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] [JsonIgnore]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Name { get; set; }
 
+        [JsonIgnore]
         public List<Song> Songs { get; set;}
     }
 }

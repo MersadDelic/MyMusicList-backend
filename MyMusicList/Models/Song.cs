@@ -13,7 +13,7 @@ namespace MyMusicList.Models
         public string Artist { get; set; }
         public string Url { get; set; }
         public int Rating { get; set; }
-        public int IsFavourite { get; set; }
+        public bool IsFavourite { get; set; }
         
         // FK
         [JsonIgnore]
